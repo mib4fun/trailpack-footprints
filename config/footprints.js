@@ -4,6 +4,7 @@ module.exports = {
 
   controllers: {
     method: '*',
+    pluralize: true,
     ignore: [
       'FootprintController'
     ]
@@ -28,4 +29,3 @@ module.exports = {
     }
   }
 }
-

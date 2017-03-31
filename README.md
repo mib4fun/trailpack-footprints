@@ -40,16 +40,21 @@ module.exports = {
 module.exports = {
   /**
    * Generate routes for controller handlers.
-   * You can set controllers to true/false to enable/disable 
+   * You can set controllers to true/false to enable/disable
    * automatic footprints routes globaly
    */
   controllers: {
-               
+
      /**
       * Default methods to accept for routes generated from controller handlers.
       */
      method: '*',
-  
+
+     /**
+     * Pluralize models
+     */
+     pluralize: true,
+
      /**
       * List of controllers to ignore; that is, do not generate footprint routes
       * for them.
@@ -119,6 +124,15 @@ The purpose of `FootprintService` is to transform and forward queries to the dat
 | `values` | Yes | An object containing the values of the record to create | `{ username: 'admin' }` |
 | `options` | No | Datastore-specific options |
 
+
+#### `count (modelName, [options])`
+
+| param | required? | description | example |
+|:---|:---|:---|:---|
+| `modelName` | Yes | The name of the model to create (in `api.models`) | `User` |
+| `options` | No | Datastore-specific options |
+
+
 #### `find (modelName, criteria, [options])`
 
 | param | required? | description | example |
@@ -126,6 +140,7 @@ The purpose of `FootprintService` is to transform and forward queries to the dat
 | `modelName` | Yes | The name of the model to search for (in `api.models`) | `User` |
 | `criteria` | Yes | An object containing the query criteria | `{ username: 'admin' }` |
 | `options` | No | Datastore-specific options |
+
 
 #### `update (modelName, criteria, values, [options])`
 
@@ -154,6 +169,18 @@ The purpose of `FootprintService` is to transform and forward queries to the dat
 | `childAttributeName` | Yes | The name of the attribute to create and associate with the parent | `roles`
 | `values` | Yes | An object containing the values to create | `{ name: 'adminRole' }`
 | `options` | No | Datastore-specific options |
+
+
+#### `countAssociation (parentModelName, parentId, childAttributeName, criteria, [options])`
+
+| param | required? | description | example |
+|:---|:---|:---|:---|
+| `parentModelName` | Yes | The name of the parent model | `User`
+| `parentId` | Yes | The id of the parent model | `1`
+| `childAttributeName` | Yes | The name of the attribute to create and associate with the parent | `roles`
+| `criteria` | Yes | An object containing the criteria to search on, or an id | `{ name: 'adminRole' }`
+| `options` | No | Datastore-specific options |
+
 
 #### `findAssociation (parentModelName, parentId, childAttributeName, criteria, [options])`
 
@@ -202,4 +229,3 @@ The purpose of the `FootprintController` is to transform and forward requests to
 [codeclimate-url]: https://codeclimate.com/github/trailsjs/trailpack-footprints
 [gitter-image]: http://img.shields.io/badge/+%20GITTER-JOIN%20CHAT%20%E2%86%92-1DCE73.svg?style=flat-square
 [gitter-url]: https://gitter.im/trailsjs/trails
-

@@ -11,7 +11,7 @@ module.exports = class FootprintsTrailpack extends Trailpack {
    * FootprintService must be provided by other trailpacks. Ensure that
    * these are available and appear valid.
    */
-  validate () {
+  validate() {
     this.modelFootprints = true
 
     if (!this.app.api.services.FootprintService) {
@@ -43,6 +43,7 @@ module.exports = class FootprintsTrailpack extends Trailpack {
    *    ----------+--------+----------------------------+-------------------
    *    Create    | POST   | /model                     | FootprintController.create
    *    Create    | POST   | /model/{id}/{child}        | FootprintController.createAssociation
+   *    count     | GET    | /model/count               | FootprintController.count
    *    Read      | GET    | /model/{id?}               | FootprintController.find
    *    Read      | GET    | /model/{id}/{child}/{id?}  | FootprintController.findAssociation
    *    Update    | PUT    | /model/{id?}               | FootprintController.update
@@ -50,16 +51,16 @@ module.exports = class FootprintsTrailpack extends Trailpack {
    *    Delete    | DELETE | /model/{id?}               | FootprintController.destroy
    *    Delete    | DELETE | /model/{id}/{child}/{id?}  | FootprintController.destroyAssociation
    */
-  configure () {
+  configure() {
     const routerUtil = this.app.packs.router.util
     const controllerFootprints = lib.Util.getControllerFootprints(this.app)
     const modelFootprints = this.modelFootprints ? lib.Util.getModelFootprints(this.app) : []
     const footprintRoutes = _.union(controllerFootprints, modelFootprints)
-
+    // console.log(footprintRoutes)
     this.app.config.routes = routerUtil.mergeRoutes(footprintRoutes, this.app.config.routes)
   }
 
-  constructor (app) {
+  constructor(app) {
     super(app, {
       config: require('./config'),
       api: require('./api'),
@@ -67,4 +68,3 @@ module.exports = class FootprintsTrailpack extends Trailpack {
     })
   }
 }
-

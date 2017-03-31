@@ -15,6 +15,11 @@ module.exports = {
   controllers: false,
 
   /**
+   * Pluralize models
+   */
+  pluralize: true,
+
+  /**
    * Generate conventional Create, Read, Update, and Delete (CRUD) routes for
    * each Model.
    */
